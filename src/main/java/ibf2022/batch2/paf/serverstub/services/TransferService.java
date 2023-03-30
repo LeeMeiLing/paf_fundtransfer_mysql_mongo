@@ -96,7 +96,7 @@ public class TransferService {
             transactionRecordRepo.insertRecord(recordJson); // this will return the inserted doc
         }catch(Exception ex){
 
-            throw new TransactionFailException("Fail to insert transaction record");
+            throw new TransactionFailException("Fail to insert transaction record"); // rollback intended
         }
 
         return record.getTransactionId();

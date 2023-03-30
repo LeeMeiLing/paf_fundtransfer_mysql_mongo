@@ -1,13 +1,10 @@
 package ibf2022.batch2.paf.serverstub.repositories;
 
-import java.sql.Date;
-
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
-import ibf2022.batch2.paf.serverstub.models.TransactionRecord;
 import jakarta.json.JsonObject;
 
 @Repository
