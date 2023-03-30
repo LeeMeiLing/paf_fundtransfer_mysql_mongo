@@ -29,9 +29,7 @@ public class TransactionRecordRepository {
      */
     public Document insertRecord(JsonObject recordJson){
     
-        Document toInsert = Document.parse(recordJson.toString());
-
-        // toInsert.put("transactionTime", Date.valueOf(toInsert.getString("transactionTime")));
+        Document toInsert = Document.parse(recordJson.toString()); // alternative way is to create a new Document()
 		
         Document inserted = mongoTemplate.insert(toInsert,"records");
         return inserted;

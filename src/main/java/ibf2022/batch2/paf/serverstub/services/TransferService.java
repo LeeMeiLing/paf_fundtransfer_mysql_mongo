@@ -21,7 +21,7 @@ public class TransferService {
     @Autowired
     TransactionRecordRepository transactionRecordRepo;
 
-    @Transactional
+    @Transactional(rollbackFor = TransactionFailException.class)
     public String transferFund(Payload payload){
 
         String srcAccName = payload.getSrcAcct();
@@ -66,13 +66,19 @@ public class TransferService {
 
         // perform withdrawal
         Integer withdrawSuccessful = bankAccRepo.withdrawFund(srcAcc.getId(),transferAmount);
-        if(withdrawSuccessful == 0){
+        if(withdrawSuccessful <= 0){
             throw new TransactionFailException("Fail to withdraw amount from source account");
         }
 
+        //simulate error for rollback
+        // int i = 1;
+        // if(i == 1){
+        //     throw new TransactionFailException("faking an error");
+        // }
+        
         // perform deposit
         Integer depositSuccessful = bankAccRepo.depositFund(destAcc.getId(),transferAmount);
-        if(depositSuccessful == 0){
+        if(depositSuccessful <= 0){
             throw new TransactionFailException("Fail to deposit amount into destination account");
         }
        
